@@ -2,7 +2,19 @@
 import json, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from evoloop.pipeline import run_end_to_end
+from evoloop.evolution import Evolution
+from evoloop.scanner import Scanner
+from evoloop.immune import ImmuneMemory
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "loop":
+        import argparse
+        ap = argparse.ArgumentParser(); ap.add_argument("--generations", type=int, default=3); a = ap.parse_args(sys.argv[2:])
+        r = Evolution().run(a.generations)
+        import json as _j; print(_j.dumps(r, indent=2)); print(f"\nEVOLUTION: gen1 created rules, gen2+ blocked recurrences, final {r['final_immune_rules']} rules, {r['final_version']}"); sys.exit(0)
+    if len(sys.argv) > 2 and sys.argv[1] == "scan":
+        im = ImmuneMemory(); from evoloop.antibody import Antibody
+        ab = Antibody("stale_table", "stale tables spent silently", signature="stale_table", probe="probe_stale_table"); im.promote(ab)
+        print(Scanner(im).check(sys.argv[2])); sys.exit(0)
     r = run_end_to_end()
     print(json.dumps(r, indent=2))
     print("\nLOOP CLOSED:" if r["second_run_stale_blocked"] else "\nLOOP OPEN:")

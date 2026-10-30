@@ -1,0 +1,37 @@
+{
+  "generations": [
+    {
+      "generation": 1,
+      "eval": 400.0,
+      "immune_rules": 2,
+      "blocked": 0,
+      "version": "first_trained_reward v1",
+      "conflict": "no conflict"
+    },
+    {
+      "generation": 2,
+      "eval": 400.0,
+      "immune_rules": 2,
+      "blocked": 2,
+      "version": "first_trained_reward v2",
+      "conflict": "no conflict"
+    },
+    {
+      "generation": 3,
+      "eval": 400.0,
+      "immune_rules": 2,
+      "blocked": 2,
+      "version": "first_trained_reward v3",
+      "conflict": "no conflict"
+    }
+  ],
+  "final_immune_rules": 2,
+  "final_version": "first_trained_reward v3",
+  "board": [
+    "Gen 1: first_trained_reward v1, 2 immune rules, 0 recurrences blocked, eval 400.0 (no conflict)",
+    "Gen 2: first_trained_reward v2, 2 immune rules, 2 recurrences blocked, eval 400.0 (no conflict)",
+    "Gen 3: first_trained_reward v3, 2 immune rules, 2 recurrences blocked, eval 400.0 (no conflict)"
+  ]
+}
+
+EVOLUTION: gen1 created rules, gen2+ blocked recurrences, final 2 rules, first_trained_reward v3

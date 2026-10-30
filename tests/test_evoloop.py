@@ -16,6 +16,18 @@ def test_loop_closes():
     r = run_end_to_end(); assert r["immune_rules"] == 2; assert r["second_run_stale_blocked"] is True; assert r["model_version"].startswith("first_trained_reward")
 def test_trainer_uses_immune_rules():
     r = run_end_to_end(); assert r["trained"]["immune_rules_applied"] == 2
+
+def test_scanner_blocks_before_execution():
+    from evoloop.scanner import Scanner
+    from evoloop.immune import ImmuneMemory
+    im = ImmuneMemory(); ab = Antibody("stale_table", "f", signature="stale_table", probe="p"); im.promote(ab)
+    assert Scanner(im).check("stale_table")["blocked"] is True; assert Scanner(im).check("other")["blocked"] is False
+def test_multi_generation_blocks_recurrences():
+    from evoloop.evolution import Evolution
+    r = Evolution().run(3); assert r["generations"][0]["blocked"] == 0; assert r["generations"][1]["blocked"] == 2; assert r["generations"][2]["blocked"] == 2; assert r["final_immune_rules"] == 2
+def test_loop_cli_flag_exists():
+    import subprocess, sys; out = subprocess.check_output([sys.executable, "run.py", "loop", "--generations", "2"], text=True); assert "EVOLUTION" in out
+
 if __name__ == "__main__":
     for n, fn in list(globals().items()):
         if n.startswith("test_"): fn(); print(f"PASS {n}")

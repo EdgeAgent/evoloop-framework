@@ -21,6 +21,6 @@ def flow(path,title,boxes,sub):
         if i<n-1: d.polygon([(x+bw+5,240),(x+bw+gap-5,225),(x+bw+gap-5,255)],fill=(45,212,191))
     d.rectangle([40,340,W-40,410],fill=(251,191,36)); d.text((W//2,375),"PROMOTION GATE  •  no signature + probe + status = functional only, never formal",font=font(22,True),fill=(11,18,32),anchor="mm"); im.save(path)
 icon(f"{OUT}/icon.png",512); icon(f"{OUT}/favicon.png",64); hero()
-flow(f"{OUT}/workflow.png","HOW THE LOOP CLOSES",["OBSERVE","FAIL","ANTIBODY","PROMOTE","TRAIN","REGISTER","EVOLVE"],"An exact failure becomes a routable immune rule, then a trained reward, then the next run.")
-flow(f"{OUT}/architecture.png","ARCHITECTURE",["PIPELINE","ANTIBODY","IMMUNE","TRAINER","VERSIONER","ENGRAM","BOARD"],"Mock trainer today. Antibody, immune gate, versioning, and recording are real.")
+flow(f"{OUT}/workflow.png","HOW THE LOOP CLOSES — v2",["OBSERVE","FAIL","ANTIBODY","PROMOTE","SCAN","TRAIN","EVOLVE"],"Scanner blocks recurrences BEFORE execution. Gen 1 creates rules, gen 2+ blocks both failures.")
+flow(f"{OUT}/architecture.png","ARCHITECTURE — v2",["PIPELINE","ANTIBODY","IMMUNE","SCANNER","TRAINER","VERSIONER","BOARD"],"Scanner + multi-generation evolution + rollback are real. Mock trainer today.")
 print("assets done")

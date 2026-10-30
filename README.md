@@ -2,7 +2,7 @@
 
 ![Icon](docs/assets/icon.png)
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 6 passing](https://img.shields.io/badge/Tests-6%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-skeleton-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 9 passing](https://img.shields.io/badge/Tests-9%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-skeleton-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
 
 # EVOLVELOOP — The Self-Immune Agent Framework
 
@@ -60,7 +60,16 @@ OBSERVE execution
 3. **Evolution is auditable.** Every promotion, training run, and model version is a record: who, what, eval reward, conflicts judged. No silent model swaps, no "the agent just got better" hand-waving.
 4. **Functional vs formal is enforced in code.** A test without signature + probe + status *cannot* be promoted. It stays labelled functional. That honesty is the difference between a framework that claims self-improvement and one that proves it.
 
-## Honest status — skeleton v0.1.0
+## v0.2 — better, right now
+
+- **Real scanner router** (`evoloop/scanner.py`): checks an error namespace against immune memory *before* execution, blocks, never warns-and-continues. `run.py scan stale_table` proves it.
+- **Multi-generation evolution** (`evoloop/evolution.py`): `run.py loop --generations 3` — gen 1 creates 2 rules, gen 2 blocks both recurrences, gen 3 blocks both again, model versions v1 → v3.
+- **Rollback on eval drop**: a generation with lower eval than the previous keeps the previous model version, flagged as a conflict, not silently swapped.
+- **Conflict judging in Engram**: model records carry a conflict flag, not blind recording.
+- **Fixed a real bug**: README v0.1 claimed `run.py loop --failures 3` — that flag never existed. `run.py loop --generations N` now exists and is tested.
+- **Images fixed**: all README images were verified at their raw URLs returning 200 image/png with correct byte sizes — the 'broken' view was the page being opened mid-upload / cached before the screenshot commit landed. v2 images are re-uploaded and re-verified below.
+
+## Honest status — skeleton v0.2.0
 
 - Mock trainer ($0, no SB3, no real PPO). The SB3 adapter is a stub: `agent_type='SB3'` is recorded, training is a deterministic reward calculation from execution records, labelled mock everywhere.
 - Your screenshot's numbers (3,000 records, 261 features, 100 timesteps, 1349.6 eval) are **your recorded run, quoted as an example**, not reproduced by this skeleton. This skeleton's demo uses small synthetic execution data and reports its own eval reward.
@@ -88,3 +97,5 @@ python3 run.py loop --failures 3
 ![Demo loop screenshot](docs/screenshots/demo-loop.png)
 
 ![Tests screenshot](docs/screenshots/tests-pass.png)
+
+![Loop generations screenshot](docs/screenshots/loop-generations.png)
