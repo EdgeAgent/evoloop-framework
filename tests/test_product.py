@@ -19,7 +19,8 @@ def test_sb3_missing_raises_not_fakes():
 def test_no_skeleton_status_claim():
     assert "Status-skeleton" not in open("README.md").read()
 def test_quickstart_has_no_broken_failures_flag():
-    assert "loop --failures" not in open("README.md").read()
+    qs = open("README.md").read().split("## Quick start")[1].split("##")[0]
+    assert "loop --failures" not in qs and "loop --generations 3" in qs
 def test_install_script_runs_tests():
     assert "test" in open("install.sh").read().lower()
 def test_dashboard_is_readonly_note():
