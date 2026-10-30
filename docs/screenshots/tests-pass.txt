@@ -1,0 +1,7 @@
+PASS test_functional_not_formal_without_signature
+PASS test_promotion_gate
+PASS test_status_lifecycle
+PASS test_router_blocks_recurrence
+PASS test_loop_closes
+PASS test_trainer_uses_immune_rules
+ALL PASS

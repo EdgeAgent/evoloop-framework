@@ -1,0 +1,35 @@
+{
+  "source": "ClusterWORM2",
+  "event_type": "clusterworm2_worm_executed",
+  "antibodies": [
+    [
+      "bash_sum",
+      "seeking",
+      true
+    ],
+    [
+      "stale_table",
+      "seeking",
+      true
+    ]
+  ],
+  "immune_rules": 2,
+  "trained": {
+    "model": "mock_trained_reward",
+    "agent_type": "SB3 (stub, mock training)",
+    "train_records": 20,
+    "feature_dim": 261,
+    "timesteps": 100,
+    "eval_mean_reward": 400.0,
+    "immune_rules_applied": 2
+  },
+  "model_version": "first_trained_reward v1",
+  "engram_entries": 1,
+  "board": [
+    "Model first_trained_reward v1 registered, 2 immune rules, eval 400.0"
+  ],
+  "second_run_stale_blocked": true
+}
+
+LOOP CLOSED:
+  2 formal immune rules → mock training eval 400.0 → first_trained_reward v1 → Engram + board recorded → stale failure blocked on second run: True
