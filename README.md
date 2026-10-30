@@ -2,7 +2,7 @@
 
 <p align="center"><img src="docs/assets/icon.png" alt="EVOLVELOOP icon, centered" width="256"></p>
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 30 passing](https://img.shields.io/badge/Tests-30%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-skeleton-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 38 passing](https://img.shields.io/badge/Tests-38%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-v2.0-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
 
 # EVOLVELOOP — The Self-Immune Agent Framework
 
@@ -60,6 +60,15 @@ OBSERVE execution
 3. **Evolution is auditable.** Every promotion, training run, and model version is a record: who, what, eval reward, conflicts judged. No silent model swaps, no "the agent just got better" hand-waving.
 4. **Functional vs formal is enforced in code.** A test without signature + probe + status *cannot* be promoted. It stays labelled functional. That honesty is the difference between a framework that claims self-improvement and one that proves it.
 
+## v2.0 — FULL PRODUCT (same standard as Hermes Caller, not a concept)
+
+`bash install.sh` → tests + evolve demo + report, no dependencies.
+`python3 run.py dashboard` → http://127.0.0.1:8769 — generations, eval, immune rules, blocked, version. Read-only, training/promotion stay CLI-only.
+`python3 run.py guarded <namespace> -- <command>` → scanner gates a REAL command: immune namespace = blocked, exit 3, command never runs. Clean namespace = command runs, exit code passed through.
+`evoloop/sb3.py` → real SB3 adapter, optional: if stable-baselines3 is installed it runs real PPO, if not it RAISES with install instructions. It never fakes 1349.6.
+
+What is still NOT done, plainly: your real SB3 ClusterWORM2 run (3,000 records, 261 features, 1349.6) is still quoted, not reproduced, until you run sb3.py on your machine with your real data + env. No live Kilo run is gated yet — guarded runner is the integration point, your Kilo workspace is the next wiring step. I will not call v2.0 "done" until that live run is proven.
+
 ## v0.4 — 50% upgraded: better images, centered icon, +50% tests, + report
 
 - **Images rebuilt v3, icon centered:** hero 1600×520, icon 1024×1024 with disc + loop + center dot exactly centered, label centered below. README now centers hero and icon with `<p align="center">`, so the icon is not left-aligned anymore.
@@ -85,7 +94,7 @@ OBSERVE execution
 - **Fixed a real bug**: README v0.1 claimed `run.py loop --failures 3` — that flag never existed. `run.py loop --generations N` now exists and is tested.
 - **Images fixed**: all README images were verified at their raw URLs returning 200 image/png with correct byte sizes — the 'broken' view was the page being opened mid-upload / cached before the screenshot commit landed. v2 images are re-uploaded and re-verified below.
 
-## Honest status — skeleton v0.2.0
+## Honest status — v2.0 (updated)
 
 - Mock trainer ($0, no SB3, no real PPO). The SB3 adapter is a stub: `agent_type='SB3'` is recorded, training is a deterministic reward calculation from execution records, labelled mock everywhere.
 - Your screenshot's numbers (3,000 records, 261 features, 100 timesteps, 1349.6 eval) are **your recorded run, quoted as an example**, not reproduced by this skeleton. This skeleton's demo uses small synthetic execution data and reports its own eval reward.
@@ -94,8 +103,12 @@ OBSERVE execution
 ## Quick start
 
 ```bash
-python3 run.py demo
-python3 run.py loop --failures 3
+bash install.sh
+python3 run.py loop --generations 3
+python3 run.py evolve examples/clusterworm2_sample.jsonl
+python3 run.py report
+python3 run.py dashboard   # http://127.0.0.1:8769, read-only
+python3 run.py guarded stale_table -- echo hello   # BLOCKED, command never runs
 ```
 
 `demo` runs the full loop once: 2 failures (bash-sum, stale-table) → 2 functional antibodies → promoted to formal immune memory → mock training → model v1 registered → Engram + board recorded → second run blocked from repeating the stale failure.

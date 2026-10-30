@@ -6,9 +6,16 @@ from evoloop.evolution import Evolution
 from evoloop.evolve_real import evolve_from_file
 from evoloop.evolution import Evolution as _Ev
 from evoloop.report import render_report as _rr
+from evoloop.dashboard import serve as _dash
+from evoloop.guarded import guarded as _guarded
 from evoloop.scanner import Scanner
 from evoloop.immune import ImmuneMemory
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "dashboard":
+        _dash(); sys.exit(0)
+    if len(sys.argv) > 1 and sys.argv[1] == "guarded":
+        ns = sys.argv[2]; cmd = sys.argv[4:] if len(sys.argv) > 3 and sys.argv[3] == "--" else sys.argv[3:]
+        sys.exit(_guarded(ns, cmd))
     if len(sys.argv) > 1 and sys.argv[1] == "report":
         import json as _j; r = _Ev().run(3); print(_rr(r, "evolution-report.html")); print(_j.dumps(r, indent=2)); sys.exit(0)
     if len(sys.argv) > 1 and sys.argv[1] == "evolve":
