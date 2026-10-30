@@ -1,8 +1,8 @@
-![EVOLVELOOP banner](docs/assets/hero.png)
+<p align="center"><img src="docs/assets/hero.png" alt="EVOLVELOOP banner" width="100%"></p>
 
-![Icon](docs/assets/icon.png)
+<p align="center"><img src="docs/assets/icon.png" alt="EVOLVELOOP icon, centered" width="256"></p>
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 20 passing](https://img.shields.io/badge/Tests-20%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-skeleton-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 30 passing](https://img.shields.io/badge/Tests-30%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-skeleton-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
 
 # EVOLVELOOP — The Self-Immune Agent Framework
 
@@ -59,6 +59,13 @@ OBSERVE execution
 2. **Reward is learned from your own execution, not a generic benchmark.** 3,000 real records, 261 features, SB3 PPO — in your screenshot that already produced a 1349.6 eval reward. The framework makes that the *default* training source, not a one-off experiment.
 3. **Evolution is auditable.** Every promotion, training run, and model version is a record: who, what, eval reward, conflicts judged. No silent model swaps, no "the agent just got better" hand-waving.
 4. **Functional vs formal is enforced in code.** A test without signature + probe + status *cannot* be promoted. It stays labelled functional. That honesty is the difference between a framework that claims self-improvement and one that proves it.
+
+## v0.4 — 50% upgraded: better images, centered icon, +50% tests, + report
+
+- **Images rebuilt v3, icon centered:** hero 1600×520, icon 1024×1024 with disc + loop + center dot exactly centered, label centered below. README now centers hero and icon with `<p align="center">`, so the icon is not left-aligned anymore.
+- **Tests 20 → 30 (+50%)**, all passing: 9 loop + 11 real-learning + 10 v0.4 (report, icon square, hero wide, centered README, badges, scanner, evolve).
+- **New: static evolution report** — `python3 run.py report` writes `evolution-report.html`, one page per run, no animation, no login. Gen, eval, rules, blocked, version in a table.
+- **Workflow / architecture maps rebuilt v3:** workflow now 8 steps (adds REPORT), architecture now 8 boxes (adds LEARNER + REPORT), larger fonts, cleaner spacing.
 
 ## v0.3 — the 11/10 push: real learning, not just a mock
 
