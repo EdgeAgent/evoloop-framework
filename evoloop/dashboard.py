@@ -8,7 +8,6 @@ import json, html
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 from .evolution import Evolution
-from .receipt import verify_receipt if False else None
 def render() -> str:
     ev = Evolution().run(3)
     rows = "".join(f"<tr><td>{g['generation']}</td><td>{g['eval']}</td><td>{g['immune_rules']}</td><td>{g['blocked']}</td><td>{html.escape(str(g['version']))}</td></tr>" for g in ev["generations"])

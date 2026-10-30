@@ -28,7 +28,7 @@ def test_scanner_still_blocks():
 def test_readme_centers_icon():
     assert 'align="center"' in open("README.md").read()
 def test_badges_say_30():
-    assert "Tests 30 passing" in open("README.md").read()
+    assert "Tests 38 passing" in open("README.md").read()
 if __name__ == "__main__":
     for n, fn in list(globals().items()):
         if n.startswith("test_"): fn(); print(f"PASS {n}")
