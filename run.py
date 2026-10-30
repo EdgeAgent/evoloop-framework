@@ -3,9 +3,12 @@ import json, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from evoloop.pipeline import run_end_to_end
 from evoloop.evolution import Evolution
+from evoloop.evolve_real import evolve_from_file
 from evoloop.scanner import Scanner
 from evoloop.immune import ImmuneMemory
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "evolve":
+        import json as _j; r = evolve_from_file(sys.argv[2] if len(sys.argv)>2 else "examples/clusterworm2_sample.jsonl"); print(_j.dumps(r, indent=2)); sys.exit(0)
     if len(sys.argv) > 1 and sys.argv[1] == "loop":
         import argparse
         ap = argparse.ArgumentParser(); ap.add_argument("--generations", type=int, default=3); a = ap.parse_args(sys.argv[2:])

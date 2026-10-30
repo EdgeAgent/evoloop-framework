@@ -2,7 +2,7 @@
 
 ![Icon](docs/assets/icon.png)
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 9 passing](https://img.shields.io/badge/Tests-9%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-skeleton-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT) [![Local-first](https://img.shields.io/badge/Local--first-Yes-teal)] [![Tests 20 passing](https://img.shields.io/badge/Tests-20%20passing-brightgreen)] [![Status skeleton](https://img.shields.io/badge/Status-skeleton-orange)] [![Promotion gate](https://img.shields.io/badge/Promotion%20gate-enforced-red)] [![Loop closed](https://img.shields.io/badge/Loop-closed-teal)]
 
 # EVOLVELOOP — The Self-Immune Agent Framework
 
@@ -60,6 +60,15 @@ OBSERVE execution
 3. **Evolution is auditable.** Every promotion, training run, and model version is a record: who, what, eval reward, conflicts judged. No silent model swaps, no "the agent just got better" hand-waving.
 4. **Functional vs formal is enforced in code.** A test without signature + probe + status *cannot* be promoted. It stays labelled functional. That honesty is the difference between a framework that claims self-improvement and one that proves it.
 
+## v0.3 — the 11/10 push: real learning, not just a mock
+
+- **Real learner** (`evoloop/learner.py`, pure Python, no SB3/torch): reward-weighted weight updates from execution records, weights persist to JSON, eval computed on held-out records. Not a fixed mock number.
+- **Real ingestion** (`evoloop/ingest.py`): reads a JSONL execution log, finds real failures (status=failed / stale / reward<0), auto-clones antibodies by error namespace. Sample: `examples/clusterworm2_sample.jsonl` (100 ClusterWORM2 records).
+- **Real evolve command**: `python3 run.py evolve examples/clusterworm2_sample.jsonl` → **eval -17.6 → 7.7, gain +25.3, held-out failure rate 1.0 → 0.0, verdict IMPROVED, 2 immune rules, hash-chained receipt**. Transparent: the failure drop is scanner blocking + learner — both are counted, neither is hidden.
+- **One-command install**: `bash install.sh` — tests + evolve demo, no dependencies.
+- **Tests 20/20 passing** (9 loop + 11 real-learning / ingest / receipt / benchmark).
+- **Still honest**: SB3 PPO is still a stub adapter, not a real SB3 run. Your 1349.6 ClusterWORM2 run is still quoted, not reproduced. What *is* real now is learning on your own log format, with a benchmark that can go down as well as up.
+
 ## v0.2 — better, right now
 
 - **Real scanner router** (`evoloop/scanner.py`): checks an error namespace against immune memory *before* execution, blocks, never warns-and-continues. `run.py scan stale_table` proves it.
@@ -99,3 +108,7 @@ python3 run.py loop --failures 3
 ![Tests screenshot](docs/screenshots/tests-pass.png)
 
 ![Loop generations screenshot](docs/screenshots/loop-generations.png)
+
+![Real evolve screenshot](docs/screenshots/evolve-real.png)
+
+![Tests 20 screenshot](docs/screenshots/tests-20.png)

@@ -1,0 +1,12 @@
+PASS test_learner_improves_or_holds
+PASS test_learner_persists_weights
+PASS test_ingest_finds_real_failures
+PASS test_evolve_from_file_improves
+PASS test_receipt_chain_tamper
+PASS test_benchmark_verdict
+PASS test_rollback_keeps_previous_version
+PASS test_engram_conflict_flag
+PASS test_scanner_action_text
+PASS test_sample_file_exists_and_parses
+PASS test_model_version_increments
+ALL PASS

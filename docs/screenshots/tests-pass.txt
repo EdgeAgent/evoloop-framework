@@ -4,4 +4,7 @@ PASS test_status_lifecycle
 PASS test_router_blocks_recurrence
 PASS test_loop_closes
 PASS test_trainer_uses_immune_rules
+PASS test_scanner_blocks_before_execution
+PASS test_multi_generation_blocks_recurrences
+PASS test_loop_cli_flag_exists
 ALL PASS

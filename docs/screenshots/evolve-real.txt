@@ -1,0 +1,18 @@
+{
+  "records": 100,
+  "distinct_failures": 2,
+  "immune_rules": 2,
+  "eval_before": -17.6,
+  "eval_after": 7.7,
+  "benchmark": {
+    "failure_rate_before": 1.0,
+    "failure_rate_after": 0.0,
+    "eval_before": -17.6,
+    "eval_after": 7.7,
+    "eval_gain": 25.3,
+    "immune_rules": 2,
+    "verdict": "IMPROVED"
+  },
+  "receipt_final_hash": "ed315f3992a3fc4b0d45f4bcca1401e377077dd12c2d672a2c6c47ae504720b7",
+  "receipt_steps": 4
+}
